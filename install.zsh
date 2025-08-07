@@ -2,10 +2,14 @@
 
 # The name of the plist file for the launchd job
 PLIST_NAME="com.user.macmaintenance.plist"
+# The name of the template file
+PLIST_TEMPLATE_NAME="com.user.macmaintenance.plist.template"
 # The directory where launchd plists are stored for the user
 LAUNCH_AGENTS_DIR="$HOME/Library/LaunchAgents"
-# The full path to the source plist file in this project
-SOURCE_PLIST_PATH="$(dirname "$0")/$PLIST_NAME"
+# The absolute path to the directory containing this script
+SCRIPT_DIR=$(cd -- "$(dirname -- \"$0\")" && pwd)
+# The full path to the source plist template file in this project
+SOURCE_PLIST_TEMPLATE_PATH="$SCRIPT_DIR/$PLIST_TEMPLATE_NAME"
 # The full path to where the plist file will be installed
 TARGET_PLIST_PATH="$LAUNCH_AGENTS_DIR/$PLIST_NAME"
 
@@ -14,8 +18,8 @@ TARGET_PLIST_PATH="$LAUNCH_AGENTS_DIR/$PLIST_NAME"
 # Installs the launchd job
 install_job() {
     echo "Installing scheduled task..."
-    if [ ! -f "$SOURCE_PLIST_PATH" ]; then
-        echo "ERROR: Plist file not found at $SOURCE_PLIST_PATH"
+    if [ ! -f "$SOURCE_PLIST_TEMPLATE_PATH" ]; then
+        echo "ERROR: Plist template file not found at $SOURCE_PLIST_TEMPLATE_PATH"
         exit 1
     fi
     
@@ -25,8 +29,9 @@ install_job() {
         mkdir -p "$LAUNCH_AGENTS_DIR"
     fi
     
-    echo "Copying plist file to $LAUNCH_AGENTS_DIR"
-    cp "$SOURCE_PLIST_PATH" "$TARGET_PLIST_PATH"
+    echo "Generating plist file from template..."
+    # Replace the placeholder with the actual path to the script directory
+    sed "s|%%MACOS_UPDATER_PATH%%|$SCRIPT_DIR|g" "$SOURCE_PLIST_TEMPLATE_PATH" > "$TARGET_PLIST_PATH"
     
     echo "Loading launchd job..."
     launchctl load "$TARGET_PLIST_PATH"
