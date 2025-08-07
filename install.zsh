@@ -6,8 +6,8 @@ PLIST_NAME="com.user.macmaintenance.plist"
 PLIST_TEMPLATE_NAME="com.user.macmaintenance.plist.template"
 # The directory where launchd plists are stored for the user
 LAUNCH_AGENTS_DIR="$HOME/Library/LaunchAgents"
-# The absolute path to the directory containing this script
-SCRIPT_DIR=$(cd -- "$(dirname -- \"$0\")" && pwd)
+# The absolute path to the directory containing this script (zsh-specific)
+SCRIPT_DIR="${0:A:h}"
 # The full path to the source plist template file in this project
 SOURCE_PLIST_TEMPLATE_PATH="$SCRIPT_DIR/$PLIST_TEMPLATE_NAME"
 # The full path to where the plist file will be installed
