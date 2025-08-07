@@ -2,9 +2,10 @@
 
 This script provides a basic maintenance routine for macOS, focusing on keeping Homebrew packages up-to-date.
 
-![GitHub last commit](https://img.shields.io/github/last-commit/jwalker/macos-updater)
-![GitHub repo size](https://img.shields.io/github/repo-size/jwalker/macos-updater)
-![GitHub issues](https://img.shields.io/github/issues/jwalker/macos-updater)
+![GitHub last commit](https://img.shields.io/github/last-commit/jwalkervt/mac-caretaker)
+[![License](https://img.shields.io/github/license/jwalkervt/mac-caretaker)](LICENSE)
+![Top language](https://img.shields.io/github/languages/top/jwalkervt/mac-caretaker)
+[![ShellCheck](https://github.com/jwalkervt/mac-caretaker/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/jwalkervt/mac-caretaker/actions/workflows/shellcheck.yml)
 
 ## Features
 
